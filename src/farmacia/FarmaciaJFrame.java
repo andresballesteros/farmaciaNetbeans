@@ -273,7 +273,6 @@ public class FarmaciaJFrame extends javax.swing.JFrame {
                     direccionSucursales(jCheckBox1, jCheckBox2));
             resumenPedidoJFrame.setVisible(true);
             this.setVisible(false);
-            System.out.println("Enviado");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -289,8 +288,6 @@ public class FarmaciaJFrame extends javax.swing.JFrame {
     }
 
     public String direccionSucursales(JCheckBox sucursal1, JCheckBox sucursal2) {
-        System.out.println(sucursal1);
-        System.out.println(sucursal2);
         String direccion = "";
         if (sucursal1.isSelected() && sucursal2.isSelected()) {
             direccion = "<html>Para la farmacia situada en Calle de la Rosa n.28"
