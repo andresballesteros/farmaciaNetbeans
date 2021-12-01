@@ -19,6 +19,9 @@ import javax.swing.JRadioButton;
  */
 public class FarmaciaJFrame extends javax.swing.JFrame {
 
+    boolean error = false;
+    String errorMsg = "";
+
     /**
      * Creates new form FarmaciaJFrame
      */
@@ -211,19 +214,51 @@ public class FarmaciaJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    //Accion para el boton de borrado
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jTextField1.setText("");
-        jTextField2.setText("");
-        buttonGroup1.clearSelection();
-        jComboBox1.setSelectedItem("Seleccione Uno");
-        jCheckBox1.setSelected(false);
-        jCheckBox2.setSelected(false);
+        //inicializa el formulario
+        limpiarFormulario();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        boolean error = false;
-        String errorMsg = "";
+        // Inicializaciond de las variables de error
+        error = false;
+        errorMsg = "";
+        //inicio de la validacion de los campos del formulario
+        validiacionFormulario();
+        //comprobacion de errores
+        comprobacionDeErrorres();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
+    //Obtiene el valor del radiobutton seleccionado    
+    public String getSelectedButton(ButtonGroup group) {
+        Enumeration<AbstractButton> e = group.getElements();
+        while (e.hasMoreElements()) {
+            AbstractButton b = e.nextElement();
+            if (b.isSelected()) {
+                return b.getText();
+            }
+        }
+        return null;
+    }
+
+    // construye el texto cpn la direccion de las sucursales seleccionadas 
+    public String direccionSucursales(JCheckBox sucursal1, JCheckBox sucursal2) {
+        String direccion = "";
+        if (sucursal1.isSelected() && sucursal2.isSelected()) {
+            direccion = "<html>Para la farmacia situada en Calle de la Rosa n.28"
+                    + "<br>y para la situada en Calle Alcazabilla n.3</html>";
+        } else if (sucursal1.isSelected() && !sucursal2.isSelected()) {
+            direccion = "Para la farmacia situada en Calle de la Rosa n.28";
+        } else if (!sucursal1.isSelected() && sucursal2.isSelected()) {
+            direccion = "Para la farmacia situada en Calle de la Rosa n.28";
+        }
+        return direccion;
+    }
+
+    // validacion de los campos del formulario
+    private void validiacionFormulario() {
         if (jTextField1.getText().equals("") || jTextField1.getText() == null) {
             error = true;
             errorMsg = errorMsg + "Debe ingresar un medicamento \n";
@@ -264,7 +299,10 @@ public class FarmaciaJFrame extends javax.swing.JFrame {
             error = true;
             errorMsg = errorMsg + "Debe seleccionar por lo menos una sucursal \n";
         }
+    }
 
+    // Comprueba si exiten errores y los imprime en pantalla, si no procede al otro jframe
+    private void comprobacionDeErrorres() {
         if (error) {
             JOptionPane.showInternalMessageDialog(null, errorMsg, "Error Validacion", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -274,30 +312,16 @@ public class FarmaciaJFrame extends javax.swing.JFrame {
             resumenPedidoJFrame.setVisible(true);
             this.setVisible(false);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    public String getSelectedButton(ButtonGroup group) {
-        Enumeration<AbstractButton> e = group.getElements();
-        while (e.hasMoreElements()) {
-            AbstractButton b = e.nextElement();
-            if (b.isSelected()) {
-                return b.getText();
-            }
-        }
-        return null;
     }
 
-    public String direccionSucursales(JCheckBox sucursal1, JCheckBox sucursal2) {
-        String direccion = "";
-        if (sucursal1.isSelected() && sucursal2.isSelected()) {
-            direccion = "<html>Para la farmacia situada en Calle de la Rosa n.28"
-                    + "<br>y para la situada en Calle Alcazabilla n.3</html>";
-        } else if (sucursal1.isSelected() && !sucursal2.isSelected()) {
-            direccion = "Para la farmacia situada en Calle de la Rosa n.28";
-        } else if (!sucursal1.isSelected() && sucursal2.isSelected()) {
-            direccion = "Para la farmacia situada en Calle de la Rosa n.28";
-        }
-        return direccion;
+    // inicializa el formulario nuevamente
+    private void limpiarFormulario() {
+        jTextField1.setText("");
+        jTextField2.setText("");
+        buttonGroup1.clearSelection();
+        jComboBox1.setSelectedItem("Seleccione Uno");
+        jCheckBox1.setSelected(false);
+        jCheckBox2.setSelected(false);
     }
 
     /**
@@ -334,6 +358,7 @@ public class FarmaciaJFrame extends javax.swing.JFrame {
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;

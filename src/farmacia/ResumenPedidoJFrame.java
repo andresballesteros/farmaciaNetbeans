@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  * @author LENOVO
  */
 public class ResumenPedidoJFrame extends javax.swing.JFrame {
-    
+
     FarmaciaJFrame farmaciaJFrame = new FarmaciaJFrame();
 
     /**
@@ -19,13 +19,13 @@ public class ResumenPedidoJFrame extends javax.swing.JFrame {
      */
     public ResumenPedidoJFrame(String distribuidor, String medicamento, String unidades,
             String tipoMedicamento, String direccion) {
-        
+
         initComponents();
         jLabel1.setText(unidades + " unidades " + tipoMedicamento + " " + medicamento);
         jLabel2.setText(direccion);
         this.setTitle("Pedido al distribuidor " + distribuidor);
         this.setLocationRelativeTo(null);
-        
+
     }
 
     /**
@@ -98,53 +98,28 @@ public class ResumenPedidoJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FarmaciaJFrame farmaciaJFrame = new FarmaciaJFrame();
-        this.dispose();
-        farmaciaJFrame.setVisible(true);
+        pedidoCancelado();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        pedidoEnviado();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    //confirmacion de envio y vuelta al formulario principal
+    private void pedidoEnviado() {
         System.out.println("Pedido enviado de forma correcta");
         JOptionPane.showMessageDialog(null, "Pedido enviado de forma correcta",
                 "Confirmación", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
         farmaciaJFrame.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(ResumenPedidoJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(ResumenPedidoJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(ResumenPedidoJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(ResumenPedidoJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new ResumenPedidoJFrame().setVisible(true);
-//            }
-//        });
-//    }
+    }
+    
+    //cancela el pedido y vuelve al formulario principal
+    private void pedidoCancelado() {
+        FarmaciaJFrame farmaciaJFrame = new FarmaciaJFrame();
+        this.dispose();
+        farmaciaJFrame.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
